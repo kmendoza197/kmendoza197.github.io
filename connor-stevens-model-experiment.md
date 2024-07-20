@@ -128,6 +128,7 @@ for t = 1:length(time)-1
 ```
 
 Next inside the for loop, we calculate the steady state gating variables for the m, n, h, a, and b gates. The respective equations are:
+
 <img width="288" alt="Screenshot 2024-07-19 at 6 27 25 PM" src="https://github.com/user-attachments/assets/efe12d0c-1251-4f64-bbf1-82e7e0d17b97">
 
 Once again, voltage is set as (t) since we want to capture the voltage at the specific iteration point. We then use the calculated steady state gating variables to initialize the gate variable vectors that were allocated outside the for loop. 

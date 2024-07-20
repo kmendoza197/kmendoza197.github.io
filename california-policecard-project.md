@@ -33,4 +33,39 @@ To analyze the policing situation in low-income and high-income neighborhoods, w
 
 For the predictive question, we want to determine if we can use median income to predict the number of police shootings in the area. To test this question, we will employ a linear regression model to accomplish this task, and determine whether there is a linear association between police shootings in high-income and low-income neighborhoods.
 
+### Exploratory Data Analysis
 
+First, we joined the data in arrests-info and demographic-info to create the shootings_income_level table. We then added all the police shootings columns from 2016 to 2018 to get the total police shootings. We also created a function to categorize the median incomes into High(>$76000), Medium($76000-$52000), and Low(<$52000). The purpose of this table is to compare the number of shootings with median income and to put the police districs data into three income categories rather than 157 distinct median incomes so as to make the statistical analysis easier.
+
+```python
+# Use this cell to join two datasets
+new_tbl= arrests.join("Agency Name",demographic, "Agency Name")
+total_shootings_tbl= new_tbl.with_column("Total Police Shootings 2016-2018", new_tbl.column("2016 Police Shootings")+new_tbl.column("2017 Police Shootings")+ new_tbl.column("2018 Police Shootings")).select("Agency Name", "Total Police Shootings 2016-2018", "Median Income")
+def income_level(income):
+    """This function seperates the Median incomes
+    into three categories High, Medium, and Low"""
+    #criteria for Low income
+    if income < 52000:
+        return "Low"
+    #Criteria for High income
+    elif income > 76000:
+        return "High"
+    #Criteria for Medium income
+    else:
+        return "Medium"
+#adds income categories to total_shootings_tbl
+shootings_income_level= total_shootings_tbl.with_column("Income category",total_shootings_tbl.apply(income_level,"Median Income"))
+
+average_police_shootings = shootings_income_level.where("Income category", are.not_containing('Medium')).group("Income category", np.mean).select('Income category','Total Police Shootings 2016-2018 mean')
+```
+
+We then grouped the previous table based on the income categories and chose to exlude the Medium income category. This is because we will perform an A/B test to answer our hypothesis question, in which we can only perfrom using two income categories. Thefore, to perform this test we must verify that there is a similar average number of police shootings within Low and High income categories. Otherwise, if the results are similar our testing procedure might not be valid. Thus, we generate a group table of summarizing the total police shootings from 2016 to 2018 and income categories of High and Low income categories. The resulting table's values indicate that there a roughly more average shootings from 2016 to 2018 in the Low income category than the total shootings within the High income category. However, we cannot state for certain that the average Police shootings from 2016 to 2018 differ significantly for high and low income categories.
+
+#### Quantitative Plot
+
+```python
+income_in_thousands=shootings_income_level.with_column("Median Income (in thousands $)",(shootings_income_level.column("Median Income")/1000)).select("Median Income (in thousands $)","Total Police Shootings 2016-2018")
+income_in_thousands.scatter("Median Income (in thousands $)","Total Police Shootings 2016-2018")
+plots.title('Relationship between Police Total Shootings \n from 2016 to 2018 and \n Median Income(in thousands $)');
+```
+<img width="635" alt="Screenshot 2024-07-19 at 8 14 35 PM" src="https://github.com/user-attachments/assets/b63d1c7a-620d-4cf1-a235-ab64c44e9fe4">

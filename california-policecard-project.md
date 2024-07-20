@@ -126,19 +126,64 @@ def simulate_and_test_statistic(tbl, labels_col, values_col):
     
     return simulated_test_stat
 
-#Example Simulated test statistic
-simulate_and_test_statistic(shootings_income_level, "Income category", "Total Police Shootings 2016-2018")
-
 random.seed(1231)
 #Perform A/B testing by simulating the test statistic's distribution under the null
 simulated_differences = make_array()
 repititons = 1500
 for i in np.arange(repititons):
-    simulated_differences = np.append(simulated_differences, simulate_and_test_statistic(shootings_income_level, "Income category", "Total Police Shootings 2016-2018"))                                     
-#Array of average differnces between Low and High
-simulated_differences
+    simulated_differences = np.append(simulated_differences, simulate_and_test_statistic(shootings_income_level, "Income category", "Total Police Shootings 2016-2018"))                    
+
 #visulization of 1500 simulated statistics
 Table().with_column('Difference Between Low and High', simulated_differences).hist()
 plots.title('Distribution Difference of Mean total Police Shootings \n for Low and High Income Categories');
 ```
 <img width="769" alt="Screenshot 2024-07-19 at 8 18 21 PM" src="https://github.com/user-attachments/assets/66a1bf15-f6d2-4cb8-b5a1-18ac1527029a">
+
+```python
+#Calculates p-value 
+p_value = np.count_nonzero(simulated_differences >= observed_test_stat) / repititons
+p_value
+```
+Through the A/B testing we found that the observed test statistic of around 3.44, which based on the 1500 simulated differences is statistically significantly differnt because we got a p-value of less than 0.05. Therefore, we can reject our null hypothesis and state with 95% confidence that there is a statisitcally signifantly larger amount of average police shootings within the Low income category compared with the high income category.
+
+## Prediction
+
+To further analyze our data, we seek to see if there is a linear relationship between the median income of a neighborhood and the total number of shootings in the area. To do this, we will conduct a linear regression by plotting the data in a scatter plot and observing its best-fit line. We will also calculate the slope and intercept of such line. To determine if the best predictive model for the data is a linear regression model, we will calculate the correlation coefficient. By examining the plots in the exploratory data analysis section, we do not expect for there to be a strong correlation coefficient (-1 or 1) because the scatter plot doesn’t indicate a linear relationship between the number of shootings and income. However, we do expect for there to be a negative correlation.
+
+```python
+#set the random seed so that results are reproducible
+random.seed(1231)
+#Scatter plot of Total police Shootings 2016-18 and median income (in thousands $) with line of best fit
+income_in_thousands.scatter(0,1,fit_line=True)
+```
+<img width="519" alt="Screenshot 2024-07-19 at 8 20 56 PM" src="https://github.com/user-attachments/assets/d551d348-d1c5-4423-a57f-2281d0d824be">
+
+```python
+#Converts data into standard units
+def standard_units(data):
+    """This function converts the data into Standard units"""
+    return (data - np.mean(data))/np.std(data)
+#Finds R value between two varaibles
+def correlation(tbl, x_col, y_col):
+    """This function finds the R value between two variables"""
+    return np.mean(standard_units(tbl.column(x_col)) * standard_units(tbl.column(y_col)))
+#R value between Median Income (in thousands $) and Total Police Shootings 2016-2018
+correlation(income_in_thousands, "Median Income (in thousands $)", "Total Police Shootings 2016-2018")
+
+#Calculates slope and intercept
+def best_fit_line(tbl,x_col, y_col):
+    """This function caculates and slope and intercept of 
+    line of best fit and then puts them into an array"""
+    r = correlation(tbl,x_col, y_col)
+    slope = r * (np.std(tbl.column(y_col))/ np.std(tbl.column(x_col)))
+    intercept = np.mean(tbl.column(y_col)) - (slope * np.mean(tbl.column(x_col)))
+    return make_array(slope,intercept)
+
+#slope and intercept of line of best fit
+best_fit_line = best_fit_line(income_in_thousands,"Median Income (in thousands $)", "Total Police Shootings 2016-2018") 
+print('slope:', best_fit_line.item(0), '; intercept:',best_fit_line.item(1))
+```
+Based on our results, the data does not fit a linear model since the r value is close to 0. However, as expected there is a negative correlation between the variables (r=-0.118). This means that there is no linear association between median income and police shootings in California, thus we are not able to use this linear model to predict the number of police shootings based on the median income of a respective police jurisdiction area. Potential changes that could be made to the data would be to get rid of any outlier that may skew the data. To get a working linear model, we could also take into consideration other variables that may affect the number of police shootings such as what police departments require to exhaust all other means before shooting.
+
+## Conclusion
+Overall, we wanted to see if there was a statisticaly signifantly greater average police shootings within police districs classified as Low income compared to the High income category. We tested this by using A/B testing in which we were able to reject our null hypothsis as we receieved a p-value that was less than 0.05. We therefore were able to conclude with 95% confidence that there is a statisitcally signifantly larger amount of average police shootings within the Low income category compared with the high income category. In addition, we also wanted to see if there was a linear correlation between median income and the number of shootings, such that as median income increased the number of ploice shootings decreased. Unfortunately, we found that the leaner model did not work very well and that there was a very weak negative correlation of aroud -0.1177. Based on our observations of the data set we also found that not all the there was unequal amount of police district samples per income category, which could have resulted in errors throughout our analysis. Therefore, for future projects we would like to observe a new data set with an equal number of police district samples for each income category to reduce any fluctations caused by the enequal sample sizes.

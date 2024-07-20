@@ -1,4 +1,4 @@
-# California Police Dataset & Statistical Project
+# California Police Dataset & Hypothesis Testing Project
 
 ```python
 # modules for research report

@@ -1,4 +1,4 @@
 # kmendoza197.github.io
 
-[`Project 1`](https://kmendoza197.github.io/connor-stevens-neuron-model/)
+[`Project 1`](docs/connor-stevens-model-experiment.md)
 

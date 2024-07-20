@@ -69,3 +69,76 @@ income_in_thousands.scatter("Median Income (in thousands $)","Total Police Shoot
 plots.title('Relationship between Police Total Shootings \n from 2016 to 2018 and \n Median Income(in thousands $)');
 ```
 <img width="635" alt="Screenshot 2024-07-19 at 8 14 35 PM" src="https://github.com/user-attachments/assets/b63d1c7a-620d-4cf1-a235-ab64c44e9fe4">
+
+In this quantitative scatter plot, we wanted to explore the data related to our prediction problem. We therefore created a scatter plot to illustrate the relationship between the total police shootings from 2016 to 2018 and the median incomes in units of thousands of dollars of the corresponding areas where the shootings took place. Based on this visualization, there doesn't appear to be a strong linear association between the explanatory variable of Median Income (in thousands $) and the predictor of total shootings from 2016 to 2018. Therefore, our linear model is unlikely to perform well.
+
+#### Qualitative Plot
+
+```python
+income_category_count = shootings_income_level.group("Income category").select('Income category','count')
+income_category_count.barh('Income category')
+plots.title("Count of Police Districs Across \n High, Medium, and Low Income Categories");
+```
+<img width="694" alt="Screenshot 2024-07-19 at 8 16 04 PM" src="https://github.com/user-attachments/assets/52f36057-4b5c-4643-93d8-de615f3c5bc8">
+
+Within this qualtitative bar plot, we wanted to make sure number of police districts were equally distributed across the three income categories of High, Medium, and Low. Based on the bar plot we saw that medium has the highest count and that Low and High vary minimaly (by around 11 samples of police districs) compared to High and Medium (by around 25 samples of police districs) and Low and Medium (by around 13 samples of police districs). Using the information presented in this bar graph we concluded that comparing the High and Low income categories would be best for the hypothesis testing since they have the closest number of samples of police districs. Therefore, the small sample size differnces would not effect the standard deviations and averages to much if we only compare the Low and High rather than the Medium and High income catagories for the A/B testing.
+
+## Hypothesis Testing
+
+Our goal is to examine policing patterns in low-income and high-income neighborhoods in California. We will merge demographic information from each district with data on police arrests to identify any differences in violent incidents, specifically police shootings. To test whether there is a significant variation in police shootings between high and low-income areas, we will carry out an A/B test using a test statistic based on the average number of police shootings in each neighborhood. This analysis will provide us with insights into the prevalence of police shootings in low and high-income neighborhoods. As for the cut-off for a significance level, we will use a p-value cut-off of 0.05, meaning that if our p-value is less than 0.05, we will reject the null hypothesis. For our experiment, the null hypothesis is that in the population, the distributions of police shootings in low-income neighborhoods and high-income neighborhoods are the same. They are different in the sample just due to chance. On the other hand, the alternative hypothesis is that in the population, the number of police shootings in low-income areas is greater, on average, than the number in high-income neighborhoods.
+
+```python
+random.seed(1231)
+# set the random seed so that results are reproducible
+def test_stat(tbl, label_col, val_col):
+    """This function defines our test statistic, which is the differnce between the average 
+    police shootings from 2016 to 2018 of the Low income category with the High Income category"""
+    
+    #tbl without medium
+    new_tbl=tbl.where("Income category", are.not_containing('Medium'))
+    #Groups table by categories and gets the average of each catgory
+    average_per_category = new_tbl.group(label_col,np.mean)
+    
+    #Gets difference between average shootings for the Low and High income categories
+    test_stat = average_per_category.column(val_col + " mean").item(1)-average_per_category.column(val_col + " mean").item(0)
+    
+    return test_stat
+
+#Observed test statistic
+observed_test_stat= test_stat(shootings_income_level, "Income category", "Total Police Shootings 2016-2018")
+
+random.seed(1231)
+def simulate_and_test_statistic(tbl, labels_col, values_col):
+    """This function defines our simulated test statistic, which shuffles low and 
+    high income category lables. It then gets the differnce between the average 
+    police shootings from 2016 to 2018 of the Low income category with the High Income category"""
+    
+    #tbl without medium
+    no_med_tbl=tbl.where("Income category", are.not_containing('Medium'))
+    #Shuffles total police shootings assinging random number of shootings per income category
+    shuffled = no_med_tbl.with_column('shuffled Income categories', no_med_tbl.sample(with_replacement = False).column(labels_col)).select("shuffled Income categories",'Total Police Shootings 2016-2018')
+    
+    #Gets the average of each income category
+    average_per_category = shuffled.group('shuffled Income categories', np.mean)
+    
+    #Gets difference between average shootings for the Low and High income categories
+    simulated_test_stat = average_per_category.column(values_col + ' mean').item(1)-average_per_category.column(values_col + ' mean').item(0)
+    
+    return simulated_test_stat
+
+#Example Simulated test statistic
+simulate_and_test_statistic(shootings_income_level, "Income category", "Total Police Shootings 2016-2018")
+
+random.seed(1231)
+#Perform A/B testing by simulating the test statistic's distribution under the null
+simulated_differences = make_array()
+repititons = 1500
+for i in np.arange(repititons):
+    simulated_differences = np.append(simulated_differences, simulate_and_test_statistic(shootings_income_level, "Income category", "Total Police Shootings 2016-2018"))                                     
+#Array of average differnces between Low and High
+simulated_differences
+#visulization of 1500 simulated statistics
+Table().with_column('Difference Between Low and High', simulated_differences).hist()
+plots.title('Distribution Difference of Mean total Police Shootings \n for Low and High Income Categories');
+```
+<img width="769" alt="Screenshot 2024-07-19 at 8 18 21 PM" src="https://github.com/user-attachments/assets/66a1bf15-f6d2-4cb8-b5a1-18ac1527029a">

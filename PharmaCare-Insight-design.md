@@ -1,10 +1,10 @@
 # "PharmaCare Insight": Pharmacovigilance Database
 
-"PharmaCare Insight"
+##### By Kristy Mendoza Rangel
 
-By Kristy Mendoza Rangel
+##### Date: July 2024
 
-Description: This is my final project for the course CS50: Introduction to Databases with SQL. 
+##### Course: Harvard CS50: Introduction to Databases with SQL 
 
 Video overview: <https://youtu.be/t3qO8ZwM29s?si=9uUGCDLWcYYIZQ_f>
 

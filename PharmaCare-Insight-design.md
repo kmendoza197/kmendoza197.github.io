@@ -75,9 +75,9 @@ The `prescriptions` table includes:
 
 All columns in this table are also specified with `NOT NULL` constraint, making all columns required.
 
-#### Averse_Drug_Reactions
+#### adverse_Drug_Reactions
 
-The `averse_drug_reactions` table includes:
+The `adverse_drug_reactions` table includes:
 
 * `id`, which specifies the unique ID for the drug reaction as an `INTEGER`. This column has the `PRIMARY KEY` constraint applied.
 * `patient_id`, which is the ID of the patient who was prescribed the drug as an `INTEGER`. This column thus has the `FOREIGN KEY` constraint applied, referencing the `id` column in the `patiens` table to ensure data integrity.
@@ -108,7 +108,7 @@ The ER Diagram details the following:
 * A healthcare provider can treat one to many patients, and a patient can be treated by one to many healthcare providers.
 * A patient can consume one to many drugs and a drug can be consumed by one to many patients.
 * A drug can only have one safety data sheet. A safety data sheet can only belong to one drug.
-* A drug can cause zero to many averse drug reactions, and an averse drug reaction can be caused by one to many drugs.
+* A drug can cause zero to many adverse drug reactions, and an adverse drug reaction can be caused by one to many drugs.
 
 ## Optimizations
 
@@ -116,7 +116,7 @@ The ER Diagram details the following:
 
 * The index `idx_prescriptions_drug_id` was created on the prescriptions table because queries involving filtering or joining prescriptions based on drug_id will benefit from this index. It enhances the performance of queries that retrieve prescriptions for a specific drug.
 
-* The index `idx_drug_id` was created on the averse_drug_reactions table because queries related to adverse drug reactions often involve filtering or joining reactions based on the drug involved. This index speeds up such queries by facilitating quick access to adverse reactions associated with a specific drug.
+* The index `idx_drug_id` was created on the adverse_drug_reactions table because queries related to adverse drug reactions often involve filtering or joining reactions based on the drug involved. This index speeds up such queries by facilitating quick access to adverse reactions associated with a specific drug.
 
 
 ## Limitations

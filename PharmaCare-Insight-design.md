@@ -99,7 +99,7 @@ The `safety_data_sheets` table includes:
 All columns in this table are also specified with `NOT NULL` constraint, making all columns required.
 
 ### Relationships
-![ERD PharmaCare Insight](ERD_PharmaCare_Insight.png)
+[ERD PharmaCare Insight](ERD_PharmaCare_Insight.png)
 
 The ER Diagram details the following:
 

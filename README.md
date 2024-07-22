@@ -1,6 +1,4 @@
-## ![1656345964845](https://github.com/user-attachments/assets/a63fae4d-0439-4a6d-b0f2-953b8d8eabf1)
-
-## Kristy Mendoza Rangel
+## ![1656345964845](https://github.com/user-attachments/assets/a63fae4d-0439-4a6d-b0f2-953b8d8eabf1) | Kristy Mendoza Rangel
 
 Kristy is a fourth-year student at Barnard College of Columbia University studying computational biology and in the pre-medical track.
 

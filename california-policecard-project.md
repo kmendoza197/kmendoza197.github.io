@@ -1,4 +1,7 @@
 # California Police Dataset & Hypothesis Testing Project
+##### By Kristy Mendoza Rangel 
+##### Date: April 2023
+##### Course: Introduction to Computational Thinking and Data Science [COMS BC1016]
 
 ```python
 # modules for research report

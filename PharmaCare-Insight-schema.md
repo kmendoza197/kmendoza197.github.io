@@ -1,6 +1,6 @@
 # PharmaCare Insight Database Schema
 
-* This is the code used to build the database `PharmaCare Insight` using SQLite.
+This contains the code used to build the database schema for PharmaCare Insight using SQLite.
 
 ``` sql
 -- Represents the patients that have consumed a Phase IV drug developed by the pharmaceutical company

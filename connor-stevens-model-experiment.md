@@ -1,4 +1,8 @@
 # Exploring the Role of A-Type Potassium Current in Neuronal Excitability: A Connor-Stevens Model Experiment
+##### By Kristy Mendoza Rangel
+##### Date: November 2023
+##### Course: Fundamentals in Computational Neuroscience [NSBV BC 2004]
+
 
 ## Abstract 
 

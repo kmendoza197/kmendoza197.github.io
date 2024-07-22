@@ -5,4 +5,4 @@
 
 [`Project 2`](california-policecard-project.md)
 
-[`Project 3`](PharmaCare-Insight-Design.md)
+[`Project 3`](PharmaCare-Insight-design.md)

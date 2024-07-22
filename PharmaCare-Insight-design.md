@@ -8,6 +8,8 @@ Description: This is my final project for the course CS50: Introduction to Datab
 
 Video overview: <https://youtu.be/t3qO8ZwM29s?si=9uUGCDLWcYYIZQ_f>
 
+[`Schema`](PharmaCare-Insight-schema.md) | [`Queries`](PharmaCare-Insight-queries.md)
+
 ## Scope
 
 * The purpose of this database is to outline an effective way to collect and analyze pharmacovigilance data and track adverse drugs reactions while also keeping safety profiles to aid in solutions.

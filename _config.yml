@@ -4,7 +4,3 @@ remote_theme: tuur29/pages-themes-cayman
 colors:
     gradient_left: "#CB356B"
     gradient_right: "##BD3F32"
-    header: "#fff"
-    android_theme: "#000" # this default to gradient_color
-    link: "#1e6bb8" # this default to gradient_color
-    section_title: "#155799" # this default to gradient_color

@@ -1,4 +1,4 @@
-# Design Document
+# "PharmaCare Insight": Pharmacovigilance Database
 
 "PharmaCare Insight"
 

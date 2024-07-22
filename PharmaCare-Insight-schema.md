@@ -47,8 +47,8 @@ CREATE TABLE prescriptions (
     FOREIGN KEY "healthcare_provider_id" REFERENCES "healthcare_providers"("id")
 );
 
--- Represents any averse drug reactions that were experiences by patients
-CREATE TABLE averse_drug_reactions (
+-- Represents any adverse drug reactions that were experiences by patients
+CREATE TABLE adverse_drug_reactions (
     "id" INTEGER NOT NULL,
     "patient_id" INTEGER NOT NULL,
     "drug_id" INTEGER NOT NULL,
@@ -74,5 +74,5 @@ CREATE TABLE safety_data_sheets (
 -- Create indexes for common searches
 CREATE INDEX idx_prescriptions_patient_id ON prescriptions(patient_id);
 CREATE INDEX idx_prescriptions_drug_id ON prescriptions(drug_id);
-CREATE INDEX idx_drug_id ON averse_drug_reactions ("drug_id");
+CREATE INDEX idx_drug_id ON adverse_drug_reactions ("drug_id");
 ```

@@ -386,7 +386,7 @@ firing_rates = spike_vector ./ 150; %spikes per ms
 data_table = table(transpose(variable_g_A_max),transpose(spike_vector),transpose(firing_rates),transpose(time_to_reach_peak));
 data_table.Properties.VariableNames = ["g_A_max (nS)", "Number of Spikes", "Firing Rate (spikes per ms)", "Depolarization Time of First Spike (ms)"]
 ```
-![Alt text](connor-stevens-project-figures/firing -rate-table.png)
+![Alt text](connor-stevens-project-figures/firing-rate-table.png)
 
 ## Conclusion
 

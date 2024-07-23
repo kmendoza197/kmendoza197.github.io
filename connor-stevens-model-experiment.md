@@ -141,7 +141,8 @@ for t = 1:length(time)-1
 Next inside the for loop, we calculate the steady state gating variables for the m, n, h, a, and b gates. The respective equations are:
 
 
-<img width="288" alt="Screenshot 2024-07-19 at 6 27 25 PM" src="https://github.com/user-attachments/assets/efe12d0c-1251-4f64-bbf1-82e7e0d17b97">
+![Alt text](connor-stevens-project-figures/steady-state-gating-variables-2.png)
+
 
 Once again, voltage is set as (t) since we want to capture the voltage at the specific iteration point. We then use the calculated steady state gating variables to initialize the gate variable vectors that were allocated outside the for loop. 
 
@@ -164,7 +165,8 @@ Once again, voltage is set as (t) since we want to capture the voltage at the sp
 ```
 The subsequent step in the for loop involves the computation of time constants for the a and b gates of the A-type channel. These time constants play a pivotal role in characterizing the kinetics of the respective gating variables. Each gating variable is associated with its unique time constant equation:
 
-<img width="252" alt="Screenshot 2024-07-19 at 6 28 51 PM" src="https://github.com/user-attachments/assets/4eabfd20-e590-47fb-85d8-f025019a70e2">
+![Alt text](connor-stevens-project-figures/time-constants-2.png)
+
 
 Once again, the voltage in these equations is represented as a function of time, aligning with the specific iteration point in the loop.
 
@@ -175,7 +177,8 @@ Once again, the voltage in these equations is represented as a function of time,
 ```
 Now that we have information on the kinetics on each gating variable, we can calculate the currents that are involved in this model. We implement the following equations: 
 
-<img width="203" alt="Screenshot 2024-07-19 at 6 29 55 PM" src="https://github.com/user-attachments/assets/cfb02072-22c8-4068-b47b-cc21289c84ff">
+![Alt text](connor-stevens-project-figures/currents-equations.png)
+
 
 Therefore, we utilize the predefined parameters established outside the for loop, incorporating both the gating variable vectors and the voltage vector. Specifically, we employ the gating variables and voltage corresponding to the precise time point (t) as we iterate through the loop.
 ``` matlab
@@ -187,7 +190,8 @@ Therefore, we utilize the predefined parameters established outside the for loop
 ```
 After computing the leak, sodium, potassium, and A-type currents for each discrete time point during our iteration, we can determine the membrane potential for the subsequent time step using this differential equation: 
 
-<img width="245" alt="Screenshot 2024-07-19 at 6 31 04 PM" src="https://github.com/user-attachments/assets/a475200e-05fe-4000-8777-563f82f25de9">
+![Alt text](connor-stevens-project-figures/membrane-potential-differential-eq.png)
+
 
 We begin by computing the change in voltage (dV) by isolating it on the left side of the equation. Subsequently, we determine the voltage at the next time step by adding dV to the voltage at the specific time point currently under iteration. We store this newly calculated value in the voltage vector so that the voltage can be used in the next time iteration. 
 ```matlab
@@ -197,7 +201,7 @@ We begin by computing the change in voltage (dV) by isolating it on the left sid
 ```
 For our last step in the for loop, we can determine the gating variable value for m, n, h, a, and b gates for the subsequent time step. We use these equations: 
 
-<img width="230" alt="Screenshot 2024-07-19 at 6 32 19 PM" src="https://github.com/user-attachments/assets/09bca34d-340a-48d4-9ea7-a6cb254cd5dd">
+![Alt text](connor-stevens-project-figures/differential-gating-variable.png)
 
 These equations take into consideration the current values of the gating variables at the time point we are currently iterating through and calculate the change in gating variable value (dm, dn, dh, da, db). Then we update the value of each gating variable vector for the next time step by adding the computed change to the current value of of the gating variables at the specific time we are in. The process of solving these differential equations mirrors the approach used for the voltage differential equation. Then we end the for loop.  
 ```matlab
@@ -228,7 +232,7 @@ xlabel("time (ms)")
 ylabel("Membrane Voltage (mV)")
 title("Control Voltage Trace")
 ```
-<img width="563" alt="Screenshot 2024-07-19 at 6 36 19 PM" src="https://github.com/user-attachments/assets/8ef0d5da-ba46-4f23-b042-01a8e42bdcd5">
+![Alt text](connor-stevens-project-figures/control-voltage-trace.png)
 
 ## Experiment: Variable Maximal A-type Current Conductance
 

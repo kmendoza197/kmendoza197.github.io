@@ -364,7 +364,7 @@ Upon concluding this nested inner loop that iterates through time and voltage, w
 end
 hold off
 ```
-<img width="843" alt="Screenshot 2024-07-19 at 6 41 26 PM" src="https://github.com/user-attachments/assets/51198cb3-579a-4dd8-9f8a-2e9dd13265f0">
+![Alt text](connor-stevens-project-figures/variable-maximal-atype-k-conductance-exp-plot.png)
 
 To visualize how the number of spikes differs with varying maximal conductance of A-type currents, we created a plot that graphs the "spike_vector" array against the "variable_g_A_max" vector. The resulting plot illustrates a discernible trend: as the maximal conductance of A-type current increases, the number of spikes produced by the neuron model within a 150 ms interval decreases. There is a negative slope in the plot that points to an inverse relationship between maximal A-type K+ conducatnce and number of spikes that the neuron produces. 
 
@@ -377,7 +377,7 @@ ylabel("number of spikes")
 title("Number of Spikes For Variable Maximal Conductance of A-type Current")
 ```
 
-<img width="562" alt="Screenshot 2024-07-19 at 6 42 45 PM" src="https://github.com/user-attachments/assets/d51545d7-9600-4ce7-9e10-7996e5c9cc07">
+![Alt text](connor-stevens-project-figures/spikes-counter-plot.png)
 
 I opted to create a table summarizing the data gathered in this experiment. To determine the firing rate, I divided the "spike_vector" by the duration of the measurement, which was 150 ms. The resulting table displays the variable g_A_max alongside their corresponding number of spikes, firing rates, and the time it takes for it to produce its first action potential. The table reveals a noticeable trend: an increase in g_A_max is associated with a decrease in the firing rate of the neuron. You also notice that it takes a longer time for the neuron to produce an action potential as you increase g_A_max. This highlighting the role of A-type current in shaping the temporal aspects of neuronal firing. It makes it more challenging for the neuron to depolarize and generate action potentials
 ```matlab
@@ -386,7 +386,7 @@ firing_rates = spike_vector ./ 150; %spikes per ms
 data_table = table(transpose(variable_g_A_max),transpose(spike_vector),transpose(firing_rates),transpose(time_to_reach_peak));
 data_table.Properties.VariableNames = ["g_A_max (nS)", "Number of Spikes", "Firing Rate (spikes per ms)", "Depolarization Time of First Spike (ms)"]
 ```
-<img width="662" alt="Screenshot 2024-07-19 at 6 49 09 PM" src="https://github.com/user-attachments/assets/926e6e6c-b795-4fde-bc80-7b724c5b4fc3">
+![Alt text](connor-stevens-project-figures/firing -rate-table.png)
 
 ## Conclusion
 

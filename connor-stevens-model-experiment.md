@@ -10,9 +10,9 @@ The Connor-Stevens Model introduces a unique element with the inclusion of an A-
 
 ## Model Summary
 
-The Connor-Stevens model is very similar to the Hodgkin-Huxley model however, this model includes an A-type current. The differential equation that illustrates the Connor-Stevens model is<img width="852" alt="Screenshot 2024-07-18 at 7 55 33 PM" src="https://github.com/user-attachments/assets/1139b99b-e487-4d5d-b942-24e8918ee03f">
+The Connor-Stevens model is very similar to the Hodgkin-Huxley model however, this model includes an A-type current. The differential equation that illustrates the Connor-Stevens model is ![Connor-Stevens model differential equation](connor-stevens-project-figures/connor-stevens-differential-equation.png)
 
-<img width="846" alt="Screenshot 2024-07-19 at 6 54 38 PM" src="https://github.com/user-attachments/assets/6bcf4a40-2052-46da-9ebb-6802a9fd813c">
+![Alt text](connor-stevens-project-figures/voltage-trace-figure.png)
 
 
 What is novel about this model is the short and brief action potential, which is primarily caused by the input of the A-current. Governed by activation and deactivation processes via gating variables a and b, where a activates A-type potassium, and b is associated with its inactivation. Despite being potassium-dependent, the A-current has a reversal potential of -75 mV, slightly lower than that of potassium. Despite its potassium dependence, the A-type current exhibits a reversal potential of -75 mV, slightly lower than the reversal potential of potassium. In this model, we employ time constants that also describe the ion channel kinetics: 

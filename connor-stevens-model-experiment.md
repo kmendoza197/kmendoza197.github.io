@@ -16,26 +16,31 @@ The Connor-Stevens model is very similar to the Hodgkin-Huxley model however, th
 
 
 What is novel about this model is the short and brief action potential, which is primarily caused by the input of the A-current. Governed by activation and deactivation processes via gating variables a and b, where a activates A-type potassium, and b is associated with its inactivation. Despite being potassium-dependent, the A-current has a reversal potential of -75 mV, slightly lower than that of potassium. Despite its potassium dependence, the A-type current exhibits a reversal potential of -75 mV, slightly lower than the reversal potential of potassium. In this model, we employ time constants that also describe the ion channel kinetics: 
-<img width="594" alt="Screenshot 2024-07-18 at 7 58 57 PM" src="https://github.com/user-attachments/assets/4211a434-8637-44d4-a81a-69da894ada06">
+![Alt text](connor-stevens-project-figures/time-constants-equation.png)
+
 
 which τ is in units of ms and 𝑉𝑚 in units of mV. The steady-state gating variables for the A-current are calculated accordingly:
 
-<img width="577" alt="Screenshot 2024-07-19 at 6 57 20 PM" src="https://github.com/user-attachments/assets/a0fcf6ff-30ca-48a5-82be-19f5b4fd4fc2">
+![Alt text](connor-stevens-project-figures/steady-state-gating-variables.png)
+
 
 These steady-state gating variables describe the long-term or equilibrium behavior of ion channel gates a and b in response to a constant membrane potential. They provide information about the proportion of ion channels in the open or closed state once the system has reached a stable condition. The A-type conductance, operating as a potassium conductance, exhibits significant activation, countering the effects of the sodium current. This phenomenon is evident in Figure 2, where the plot illustrates the concurrent activation of the a and m gates. At hyperpolarizing voltages, the steady state of the a gate remains high but increases with membrane potential. Conversely, the steady state of the b gate, starting low (0.2) at negative voltages, decreases with increased voltage.
 
-<img width="803" alt="Screenshot 2024-07-19 at 6 58 18 PM" src="https://github.com/user-attachments/assets/80a2002a-0129-49ab-bbe1-cad67bfaec13">
+![Alt text](connor-stevens-project-figures/steady-state-gating-variables-plot.png)
+
 
 It also contains sodium and potassium currents, however, they have faster kinetics so action potentials are shorter. As in the Hodgkin and Huxley model, sodium is the primary ion responsible for depolarizing the membrane as it allows sodium ions to flow into the cell. It has fast kinetics as explained
 by the following rate constants for its m and h gates:
-<img width="252" alt="Screenshot 2024-07-19 at 7 00 16 PM" src="https://github.com/user-attachments/assets/a320b715-f2cf-4466-a19b-fbfc6f1bb158">
-<img width="921" alt="Screenshot 2024-07-19 at 6 59 38 PM" src="https://github.com/user-attachments/assets/e5b8c54c-2483-4a61-8579-4b12f079b433">
+![Alt text](connor-stevens-project-figures/alpha-m-kinetics.png)
+![Alt text](connor-stevens-project-figures/rate-constants-m-h.png)
+
 
 The m gate is associated with the activation of the sodium channel, while the h gate is associated with the inactivation of the sodium channels. The steady-state plot shows that the m gate is fairly activated during high voltages, while the h gate is activated during hyperpolarizing voltages.
 
 This model also takes into account delayed rectifier potassium current ![equation](https://latex.codecogs.com/svg.image?&space;I_{K}) which its channels only contain one gating variable, n. The opening and closing of this gate control the outward flow of potassium ions, which repolarizes the neuron. These channels' kinetics are also faster than the Hodgkin and Huxley potassium channels. These equations explain the rate constants of the delayed-rectifier potassium channels:
 
-<img width="601" alt="Screenshot 2024-07-19 at 7 04 47 PM" src="https://github.com/user-attachments/assets/73114a76-888d-4700-bce3-b6107c3b15be">
+![Alt text](connor-stevens-project-figures/rate-constants-n.png)
+
 
 Figure 2 shows the  gradual increase of the n-gate activity as you increase the membrane voltage. The model incorporates leak channels, facilitating the passive movement of ions that influence the neuron's resting potential. The initiation of action potentials requires the application of an external current.
 
@@ -110,11 +115,13 @@ control_g_A_max=4700; %nS
 ```
 A for loop was implemented to iterate through time, recognizing the temporal dependency of several variables of interest First inside the for loop, the rate constants for the m, n, and h gates were calculated using their respective equations. Each gating mechanism is associated with its unique set of rate constants, namely alpha and beta. Alpha describes the kinetics of the opening of a gate while beta describes the kinetics of the closing of the gate. For the sodium channel, it is made up of an m and h gate, thus it has 4 rate constant equations that describe its kinetics. Those equations are: 
 
-<img width="235" alt="Screenshot 2024-07-19 at 6 21 39 PM" src="https://github.com/user-attachments/assets/aec05826-8950-4101-a652-f548f5c6e4f9">
+![Alt text](connor-stevens-project-figures/rate-constants-m-h-2.png)
+
 
 The potassium channel is characterized by a single gating variable, 'n.' The kinetics governing the opening and closing of the 'n' gate are described by specific rate constant equations:
 
-<img width="232" alt="Screenshot 2024-07-19 at 6 24 10 PM" src="https://github.com/user-attachments/assets/c03cbfb3-2e73-478f-9d1f-c92ec7399cb7">
+![Alt text](connor-stevens-project-figures/rate-constants-n-2.png)
+
 
 For each of these equations, the voltage input is coded to be (t) since we want the voltage at that time we are iterating through.
 

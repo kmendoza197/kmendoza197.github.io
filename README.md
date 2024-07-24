@@ -13,7 +13,7 @@ Kristy is a fourth-year student at Barnard College of Columbia University studyi
   
 - [Project 4: Investigating Copy Number Alterations and Mutational Signatures in Ultra Rare CNS Tumors](summer-2023.md) (August 2023)
   
- **Description**:
+  **Description**:
   
 - [Project 3: California Policecard Project](california-policecard-project.md) (April 2023)
   

@@ -18,7 +18,7 @@ Kristy is a fourth-year student at Barnard College of Columbia University studyi
   
   **Description**: A project aimed to explore the relationship between police shootings from 2016-2018 across low and high-income categories within various police and sheriff agencies in         California. Using data from Campaign Zero, focused on police violence and accountability, we analyzed total police shootings from 2016-2018 from the police-arrests data table and median    incomes from the police-demographic data table.
 
-- [Project 2: Investigating the Effectiveness of Nanopore Technology and Hi-C Analysis in Detecting Structural Variations in Human Soft-Tissue Sarcoma Samples] (August 2022)
+- [Project 2: Investigating the Effectiveness of Nanopore Technology and Hi-C Analysis in Detecting Structural Variations in Human Soft-Tissue Sarcoma Samples](summer-2022.md) (August 2022)
    **Description**: 
 
 - [Project 1: Investigating Chromatin Organization Around Prominent Oncogenes Through Hi-C Analysis](summer-2021.md) (August 2021)
